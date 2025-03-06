@@ -1,100 +1,191 @@
 /* src/styles/selectBranch.css */
+:root {
+  --primary-color: #f0212f;
+  --primary-color-dark: #d10d1b;
+  --secondary-color: #4d4d4f;
+  --light-gray: #f5f5f7;
+  --white: #ffffff;
+}
+
+/* Ajustes en el body para eliminar márgenes y scroll por defecto */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Container principal a pantalla completa */
 .select-branch-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f5f5f7;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw; /* Ancho completo de la ventana */
+  height: 100vh; /* Alto completo de la ventana */
+  background-color: var(--light-gray);
+  padding: 0; /* Eliminamos padding que podría causar overflow */
+  margin: 0; /* Eliminamos márgenes que podrían causar overflow */
+  background-image: linear-gradient(135deg, rgba(240, 33, 47, 0.05) 0%, rgba(77, 77, 79, 0.05) 100%);
+  box-sizing: border-box; /* Asegura que padding no añada al tamaño total */
+  overflow: hidden; /* Elimina cualquier overflow */
+}
+
+.select-branch-content {
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 90%; /* Usamos porcentaje en vez de tamaño fijo */
+  max-width: 55vw; /* Mantenemos un tamaño máximo para pantallas grandes */
+  text-align: center;
+  position: relative;
+  border-top: 5px solid var(--primary-color);
+  overflow-y: auto; /* Solo permitimos scroll dentro del contenido si es necesario */
+  max-height: 85vh; /* Límite de altura para evitar que se salga de la pantalla */
+}
+
+.company-branding {
+  margin-bottom: 20px; /* Reducido para ahorrar espacio vertical */
+  display: flex;
+  justify-content: center;
+}
+
+.company-logo {
+  height: 80px; /* Reducido ligeramente */
+  width: auto;
+  max-width: 100%;
+}
+
+.branch-header {
+  margin-bottom: 20px; /* Reducido para ahorrar espacio vertical */
+}
+
+.branch-header h2 {
+  color: var(--secondary-color);
+  font-size: 22px; /* Reducido ligeramente */
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.branch-header p {
+  color: #666;
+  font-size: 14px; /* Reducido ligeramente */
+  margin: 0; /* Eliminar margen para ahorrar espacio */
+}
+
+.branch-selector {
+  margin-bottom: 20px; /* Reducido para ahorrar espacio vertical */
+  text-align: left;
+}
+
+.branch-selector label {
+  display: block;
+  margin-bottom: 6px; /* Reducido ligeramente */
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--primary-color);
+  pointer-events: none;
+}
+
+.branch-select-field {
+  width: 100%;
+  padding: 12px 16px; /* Reducido ligeramente */
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px; /* Reducido ligeramente */
+  background-color: white;
+  appearance: none;
+  transition: all 0.3s ease;
+  color: var(--secondary-color);
+  box-sizing: border-box; /* Asegura que padding no añada al tamaño total */
+}
+
+.branch-select-field:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(240, 33, 47, 0.2);
+}
+
+.branch-select-field:disabled {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+
+.continue-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 20px; /* Reducido ligeramente */
+  font-size: 15px; /* Reducido ligeramente */
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-sizing: border-box; /* Asegura que padding no añada al tamaño total */
+}
+
+.continue-button:hover:not(.disabled) {
+  background-color: var(--primary-color-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(240, 33, 47, 0.3);
+}
+
+.continue-button:active:not(.disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(240, 33, 47, 0.3);
+}
+
+.continue-button.disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.admin-link {
+  margin-top: 20px; /* Reducido para ahorrar espacio vertical */
+  text-align: center;
+}
+
+.admin-button {
+  background: none;
+  border: none;
+  color: var(--secondary-color);
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.admin-button:hover {
+  color: var(--primary-color);
+}
+
+
+/* Ajustes para que funcione bien en dispositivos iOS */
+@supports (-webkit-touch-callout: none) {
+  .select-branch-container {
+    height: -webkit-fill-available;
   }
-  
-  .select-branch-content {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-  }
-  
-  .branch-header {
-    margin-bottom: 30px;
-  }
-  
-  .branch-header h2 {
-    color: #333;
-    font-size: 28px;
-    margin-bottom: 10px;
-  }
-  
-  .branch-header p {
-    color: #666;
-    font-size: 16px;
-  }
-  
-  .branch-selector {
-    margin-bottom: 30px;
-    text-align: left;
-  }
-  
-  .branch-selector label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #555;
-  }
-  
-  .branch-select-field {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    background-color: white;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 16px;
-  }
-  
-  .branch-select-field:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
-  }
-  
-  .continue-button {
-    background-color: #d71920;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 14px 20px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .continue-button:hover:not(.disabled) {
-    background-color: #b0171e;
-    transform: translateY(-2px);
-  }
-  
-  .continue-button:active:not(.disabled) {
-    transform: translateY(0);
-  }
-  
-  .continue-button.disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-  
-  @media (max-width: 600px) {
-    .select-branch-content {
-      padding: 30px 20px;
-    }
-  }
+}

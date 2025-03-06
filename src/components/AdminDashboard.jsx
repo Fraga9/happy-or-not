@@ -215,7 +215,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
               
-              <button className="navigation-button" onClick={() => navigate("/select-branch")}>
+              <button className="navigation-button" onClick={() => navigate("/")}>
                 Ir a Encuesta
               </button>
             </div>

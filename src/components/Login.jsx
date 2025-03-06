@@ -33,7 +33,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       await saveUserToFirestore(userCredential.user);
-      navigate("/select-branch");
+      navigate("/admin");
     } catch (error) {
       alert("Error al iniciar sesión: " + error.message);
     }
@@ -43,7 +43,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithPopup(auth, googleProvider);
       await saveUserToFirestore(userCredential.user);
-      navigate("/select-branch");
+      navigate("/admin");
     } catch (error) {
       alert("Error con Google: " + error.message);
     }

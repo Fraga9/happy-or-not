@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/selectBranch.css";
+// Asumiendo que tienes un logo de la empresa en la carpeta de assets
+import companyLogo from "../assets/Promexma.jpeg"; // Ajusta esta ruta según donde tengas tu logo
 
 const regions = {
   "Centro": [
@@ -63,9 +65,17 @@ export default function SelectBranch({ onSelect }) {
     navigate("/survey");
   };
 
+  const handleAdmin = () => {
+    navigate("/admin");
+  };
+
   return (
     <div className="select-branch-container">
       <div className="select-branch-content">
+        <div className="company-branding">
+          <img src={companyLogo} alt="Logo de la empresa" className="company-logo" />
+        </div>
+
         <div className="branch-header">
           <h2>Selecciona tu sucursal</h2>
           <p>Elige la sucursal para la que deseas iniciar la encuesta de satisfacción</p>
@@ -73,33 +83,37 @@ export default function SelectBranch({ onSelect }) {
 
         <div className="branch-selector">
           <label htmlFor="region-select">Región</label>
-          <select 
-            id="region-select"
-            className="branch-select-field" 
-            onChange={handleRegionChange} 
-            value={selectedRegion}
-          >
-            <option value="">Elige una región</option>
-            {Object.keys(regions).map((region) => (
-              <option key={region} value={region}>{region}</option>
-            ))}
-          </select>
+          <div className="select-wrapper">
+            <select 
+              id="region-select"
+              className="branch-select-field" 
+              onChange={handleRegionChange} 
+              value={selectedRegion}
+            >
+              <option value="">Elige una región</option>
+              {Object.keys(regions).map((region) => (
+                <option key={region} value={region}>{region}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="branch-selector">
           <label htmlFor="branch-select">Sucursal</label>
-          <select 
-            id="branch-select"
-            className="branch-select-field" 
-            onChange={handleBranchChange} 
-            value={selectedBranch} 
-            disabled={!selectedRegion} // Deshabilitar si no se ha seleccionado una región
-          >
-            <option value="">Elige una sucursal</option>
-            {selectedRegion && regions[selectedRegion].map((branch) => (
-              <option key={branch} value={branch}>{branch}</option>
-            ))}
-          </select>
+          <div className="select-wrapper">
+            <select 
+              id="branch-select"
+              className="branch-select-field" 
+              onChange={handleBranchChange} 
+              value={selectedBranch} 
+              disabled={!selectedRegion} // Deshabilitar si no se ha seleccionado una región
+            >
+              <option value="">Elige una sucursal</option>
+              {selectedRegion && regions[selectedRegion].map((branch) => (
+                <option key={branch} value={branch}>{branch}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <button 
@@ -109,6 +123,12 @@ export default function SelectBranch({ onSelect }) {
         >
           Continuar
         </button>
+        
+        <div className="admin-link">
+          <button onClick={handleAdmin} className="admin-button">
+            Acceso Administrador
+          </button>
+        </div>
       </div>
     </div>
   );

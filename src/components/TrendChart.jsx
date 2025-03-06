@@ -30,8 +30,8 @@ const TrendChart = ({ data }) => {
         label: "Calificación Promedio",
         data: data.map(item => item.rating),
         fill: false,
-        backgroundColor: "rgba(54, 162, 235, 0.5)",
-        borderColor: "rgb(54, 162, 235)",
+        backgroundColor: "rgba(240, 33, 47, 0.9)",
+        borderColor: "rgb(240, 33, 47)",
         tension: 0.3,
         pointRadius: 5,
         pointHoverRadius: 8

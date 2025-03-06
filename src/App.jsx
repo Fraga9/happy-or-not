@@ -30,11 +30,11 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/" element={loggedIn ? <Navigate to="/select-branch" /> : <Login onLogin={() => setLoggedIn(true)} />} />
+      <Route path="/login" element={loggedIn ? <Navigate to="/select-branch" /> : <Login onLogin={() => setLoggedIn(true)} />} />
       <Route path="/signup" element={loggedIn ? <Navigate to="/select-branch" /> : <Signup />} />
-      <Route path="/select-branch" element={loggedIn ? <SelectBranch onSelect={setBranch} /> : <Navigate to="/" />} />
-      <Route path="/admin" element={loggedIn ? <AdminDashboard /> : <Navigate to="/" />} />
-      <Route path="/survey" element={loggedIn && branch ? <Survey branch={branch} /> : <Navigate to="/select-branch" />} />
+      <Route path="/" element={<SelectBranch onSelect={setBranch} />} />
+      <Route path="/admin" element={loggedIn ? <AdminDashboard /> : <Navigate to="/login" />} />
+      <Route path="/survey" element={branch ? <Survey branch={branch} /> : <Navigate to="/select-branch" />} />
     </Routes>
   );
 }

@@ -1,27 +1,53 @@
+:root {
+  --primary-color: #f0212f;
+  --primary-color-dark: rgb(209, 13, 27);
+  --secondary-color: #4d4d4f;
+  --light-gray: #f5f5f7;
+  --white: #ffffff;
+}
+
 /* src/styles/survey.css */
 .survey-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f5f5f7;
-  padding: 20px;
+  width: 100vw; /* Ancho completo de la ventana */
+  height: 100vh; /* Alto completo de la ventana */
+  background-color: var(--light-gray);
+  padding: 0; /* Eliminamos padding que podría causar overflow */
+  margin: 0; /* Eliminamos márgenes que podrían causar overflow */
+  background-image: linear-gradient(135deg, rgba(240, 33, 47, 0.05) 0%, rgba(77, 77, 79, 0.05) 100%);
+  box-sizing: border-box; /* Asegura que padding no añada al tamaño total */
+  overflow: hidden; /* Elimina cualquier overflow */
 }
 
 .survey-content {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   padding: 40px;
-  width: 100%;
-  max-width: 600px;
+  width: 90%; /* Usamos porcentaje en vez de tamaño fijo */
+  max-width: 55vw; /* Mantenemos un tamaño máximo para pantallas grandes */
+  text-align: center;
+  position: relative;
+  border-top: 5px solid var(--primary-color);
+  overflow-y: auto; /* Solo permitimos scroll dentro del contenido si es necesario */
+  max-height: 85vh; /* Límite de altura para evitar que se salga de la pantalla */
+}
+
+.company-branding {
+  display: flex;
+  justify-content: center;
+}
+
+.company-logo {
+  height: 80px; /* Reducido ligeramente */
+  width: auto;
+  max-width: 100%;
 }
 
 .survey-header {
-  text-align: center;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  margin-bottom: 20px; /* Reducido para ahorrar espacio vertical */
 }
 
 .survey-header h2 {
@@ -174,6 +200,26 @@
 }
 
 @media (max-width: 480px) {
+  .survey-content {
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%; /* Usamos porcentaje en vez de tamaño fijo */
+    max-width: 65vw; /* Mantenemos un tamaño máximo para pantallas grandes */
+    max-height: 85vh; /* Límite de altura para evitar que se salga de la pantalla */
+  }
+
+  .sucursal-button {
+    padding: 14px 20px;
+    font-size: 16px;
+    width: 70%;
+  }
+
+  .survey-header h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+
   .feedback-buttons {
     flex-direction: column;
     gap: 12px;

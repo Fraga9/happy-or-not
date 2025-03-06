@@ -28,7 +28,7 @@ export default function Signup() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await saveUserToFirestore(userCredential.user); // Guardar en Firestore
-      navigate("/select-branch"); 
+      navigate("/admin"); 
     } catch (error) {
       alert("Error al registrarse: " + error.message);
     }
@@ -101,7 +101,7 @@ export default function Signup() {
           </button>
           
           <div className="login-option">
-            ¿Ya tienes cuenta? <a href="/">Iniciar sesión</a>
+            ¿Ya tienes cuenta? <a href="/login">Iniciar sesión</a>
           </div>
         </div>
       </div>

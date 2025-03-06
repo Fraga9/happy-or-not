@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { saveFeedback } from "../services/firebaseService";
 import { auth } from "../firebaseConfig";
 import "../styles/survey.css";
+import companyLogo from "../assets/Promexma.jpeg"; 
+
 
 const Survey = () => {
   const [rating, setRating] = useState(null);
@@ -16,7 +18,7 @@ const Survey = () => {
       setSucursal(savedBranch);
     } else {
       // Si no hay sucursal seleccionada, redirigir a la selección
-      navigate("/select-branch");
+      navigate("/");
     }
   }, [navigate]);
 
@@ -79,11 +81,14 @@ const Survey = () => {
   return (
     <div className="survey-container">
       <div className="survey-content">
+        <div className="company-branding">
+          <img src={companyLogo} alt="Logo de la empresa" className="company-logo" />
+        </div>
         <div className="survey-header">
           <h2>Encuesta de Satisfacción</h2>
           <p>Sucursal seleccionada: <strong>{sucursal}</strong></p>
           <button 
-          className="sucursal-button" onClick={() => navigate("/select-branch")}
+          className="sucursal-button" onClick={() => navigate("/")}
           >
             Cambiar sucursal
           </button>

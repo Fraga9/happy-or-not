@@ -22,14 +22,16 @@ const SatisfactionChart = ({ data }) => {
           total ? (negative / total) * 100 : 0
         ],
         backgroundColor: [
-          "rgba(75, 192, 192, 0.7)",
-          "rgba(255, 205, 86, 0.7)",
-          "rgba(255, 99, 132, 0.7)"
+          "rgba(240, 33, 47, 0.9)",
+          "rgba(165,165,165,0.9)" ,
+          "rgba(77, 77, 79, 0.9)"
+          
         ],
         borderColor: [
-          "rgb(75, 192, 192)",
-          "rgb(255, 205, 86)",
-          "rgb(255, 99, 132)"
+          "rgba(240, 33, 47, 1)",
+          "rgba(165,165,165,1)",
+          "rgba(77, 77, 79, 1)"
+          
         ],
         borderWidth: 1
       }
