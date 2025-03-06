@@ -177,7 +177,7 @@ const AdminDashboard = () => {
         <div className="dashboard-top-section">
           <div className="dashboard-header">
             <div className="header-left">
-              <h1>Dashboard de Satisfacción</h1>
+              <h1>Dashboard Xpresa</h1>
             </div>
             <div className="header-right">
               <div className="filter-container">

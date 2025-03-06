@@ -1,0 +1,55 @@
+/* src/styles/whatsappQR.css */
+.whatsapp-qr-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.whatsapp-qr-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 400px;
+}
+
+.whatsapp-qr-container h3 {
+  color: #25d366; /* Color de WhatsApp */
+  margin-bottom: 10px;
+}
+
+.whatsapp-qr-container p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.whatsapp-qr-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.whatsapp-qr-container .close-button {
+  background-color: #25d366; /* Color de WhatsApp */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-qr-container .close-button:hover {
+  background-color: #128c7e; /* Color de WhatsApp más oscuro */
+}
