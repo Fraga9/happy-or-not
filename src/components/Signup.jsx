@@ -10,6 +10,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState(""); // Agregar un campo para el nombre
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   // Función para guardar el usuario en Firestore
@@ -24,83 +25,107 @@ export default function Signup() {
     console.log("Usuario registrado y guardado en Firestore.");
   };
 
-  const handleSignup = async () => {
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await saveUserToFirestore(userCredential.user); // Guardar en Firestore
       navigate("/admin"); 
     } catch (error) {
+      console.error(error);
       alert("Error al registrarse: " + error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
   
   return (
-    <div className="signup-page-container">
+    <div className="signup-container">
       {/* Sección izquierda con imagen y texto */}
-      <div className="signup-left-section">
-        <div className="left-content">
-          <h1 className="left-title">Crea tu cuenta de administrador</h1>
-          <p className="left-description">
+      <div className="signup-banner">
+        <div className="banner-content">
+          <div className="logo-container">
+            <img src="src/assets/Promexma.svg" alt="Promexma Logo" className="company-logo" />
+          </div>
+          <h1 className="banner-title">Crea tu cuenta de administrador</h1>
+          <p className="banner-description">
             Regístrate para gestionar tu sucursal y aplicar encuestas de satisfacción a tus clientes.
           </p>
         </div>
+        <div className="banner-overlay"></div>
       </div>
 
       {/* Sección derecha con el formulario */}
-      <div className="signup-right-section">
-        <div className="signup-form-container">
-          <h2 className="welcome-text">Crear cuenta</h2>
-
-          <div className="form-group">
-            <label htmlFor="name">Nombre</label>
-            <input
-              id="name"
-              type="text"
-              className="input-field"
-              placeholder="Tu nombre"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
+      <div className="signup-form-section">
+        <div className="form-wrapper">
+          <h2 className="form-title">Crear cuenta</h2>
+          <p className="form-subtitle">Regístrate para acceder a tu panel</p>
           
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              className="input-field"
-              placeholder="ejemplo@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="password">Contraseña</label>
-            <div className="password-input-container">
-              <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                className="input-field"
-                placeholder="Mínimo 8 caracteres"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <button 
-                type="button" 
-                className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "👁️" : "👁️‍🗨️"}
-              </button>
+          <form onSubmit={handleSignup} className="signup-form">
+            <div className="input-group">
+              <label htmlFor="name">Nombre</label>
+              <div className="input-wrapper">
+                <i className="input-icon name-icon">👤</i>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Tu nombre"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
             </div>
-          </div>
+            
+            <div className="input-group">
+              <label htmlFor="email">Correo electrónico</label>
+              <div className="input-wrapper">
+                <i className="input-icon email-icon">✉️</i>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="ejemplo@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            
+            <div className="input-group">
+              <label htmlFor="password">Contraseña</label>
+              <div className="input-wrapper">
+                <i className="input-icon password-icon">🔒</i>
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Mínimo 8 caracteres"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button 
+                  type="button" 
+                  className="visibility-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                >
+                  {showPassword ? "👁️" : "👁️‍🗨️"}
+                </button>
+              </div>
+            </div>
+            
+            <button 
+              type="submit" 
+              className="btn btn-primary"
+              disabled={isLoading}
+            >
+              {isLoading ? "Registrando..." : "Registrarse"}
+            </button>
+          </form>
           
-          <button className="signup-button" onClick={handleSignup}>
-            Registrarse
-          </button>
-          
-          <div className="login-option">
+          <div className="login-prompt">
             ¿Ya tienes cuenta? <a href="/login">Iniciar sesión</a>
           </div>
         </div>
