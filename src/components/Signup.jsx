@@ -46,7 +46,7 @@ export default function Signup() {
       <div className="signup-banner">
         <div className="banner-content">
           <div className="logo-container">
-            <img src="src/assets/Promexma.svg" alt="Promexma Logo" className="company-logo" />
+            <img src="src/assets/Promexma.svg" alt="Promexma Logo" className="company-logo-form" />
           </div>
           <h1 className="banner-title">Crea tu cuenta de administrador</h1>
           <p className="banner-description">

@@ -64,7 +64,7 @@ export default function Login() {
       <div className="login-banner">
         <div className="banner-content">
           <div className="logo-container">
-            <img src="src/assets/Promexma.svg" alt="Promexma Logo" className="company-logo" />
+            <img src="src/assets/Promexma.svg" alt="Promexma Logo" className="company-logo-form" />
           </div>
           <h1 className="banner-title">Inicia sesión como administrador</h1>
           <p className="banner-description">

@@ -63,7 +63,7 @@ body {
   margin-bottom: 3rem;
 }
 
-.company-logo {
+.company-logo-form {
   width: auto;
   height: 60px;
   filter: brightness(0) invert(1); /* Hace que el logo SVG sea blanco */
@@ -266,7 +266,7 @@ body {
     max-width: 100%;
   }
   
-  .company-logo {
+  .company-logo-form {
     height: 50px;
   }
 }
@@ -300,7 +300,7 @@ body {
     margin-bottom: 1.5rem;
   }
   
-  .company-logo {
+  .company-logo-form {
     height: 40px;
   }
   

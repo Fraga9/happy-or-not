@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/selectBranch.css";
 // Asumiendo que tienes un logo de la empresa en la carpeta de assets
-import companyLogo from "../../public/Promexma.jpeg";
+import companyLogo from "/Promexma.jpeg";
 
 const regions = {
   "Centro": [

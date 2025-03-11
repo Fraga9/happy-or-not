@@ -63,7 +63,7 @@ body {
   margin-bottom: 3rem;
 }
 
-.company-logo {
+.company-logo-form {
   width: auto;
   height: 60px;
 }
@@ -334,7 +334,7 @@ body {
     max-width: 100%;
   }
   
-  .company-logo {
+  .company-logo-form {
     height: 50px;
   }
 }
@@ -368,7 +368,7 @@ body {
     margin-bottom: 1.5rem;
   }
   
-  .company-logo {
+  .company-logo-form {
     height: 40px;
   }
   
