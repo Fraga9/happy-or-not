@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { saveFeedback } from "../services/firebaseService";
 import { auth } from "../firebaseConfig";
 import "../styles/survey.css";
-import companyLogo from "../assets/Promexma.jpeg";
+import companyLogo from "../../public/Promexma.jpeg";
 import WhatsAppQR from "./WhatsAppQR"; // Importa el nuevo componente
 
 const Survey = () => {
