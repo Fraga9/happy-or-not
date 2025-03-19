@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "happy-or-not-88f28"
-  }
+    "default": "xpresa3",
+    "xpresa": "xpresa3"
+  },
+  "targets": {},
+  "etags": {}
 }
