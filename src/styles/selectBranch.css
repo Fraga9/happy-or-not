@@ -25,7 +25,7 @@ body {
   height: 100vh; /* Alto completo de la ventana */
   background-color: var(--light-gray);
   padding: 0; /* Eliminamos padding que podría causar overflow */
-  margin-bottom: 5vh;
+  margin-bottom: 00;
   background-image: linear-gradient(135deg, rgba(240, 33, 47, 0.05) 0%, rgba(77, 77, 79, 0.05) 100%);
   box-sizing: border-box; /* Asegura que padding no añada al tamaño total */
   overflow: hidden; /* Elimina cualquier overflow */
@@ -36,13 +36,14 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   padding: 40px;
+  margin-bottom: 8vh;
   width: 90%; /* Usamos porcentaje en vez de tamaño fijo */
-  max-width: 55vw; /* Mantenemos un tamaño máximo para pantallas grandes */
+  max-width: 60vw; /* Mantenemos un tamaño máximo para pantallas grandes */
   text-align: center;
   position: relative;
   border-top: 5px solid var(--primary-color);
   overflow-y: auto; /* Solo permitimos scroll dentro del contenido si es necesario */
-  max-height: 85vh; /* Límite de altura para evitar que se salga de la pantalla */
+  max-height: 90vh; /* Límite de altura para evitar que se salga de la pantalla */
 }
 
 .company-branding {
@@ -187,5 +188,117 @@ body {
 @supports (-webkit-touch-callout: none) {
   .select-branch-container {
     height: -webkit-fill-available;
+  }
+}
+
+
+/* Media queries para mejorar la experiencia en tablets */
+@media (max-width: 768px) {
+  .select-branch-content {
+    padding: 30px 20px;
+    width: 90%;
+    max-width: 90%;
+    margin-bottom: 5vh;
+  }
+  
+  .company-logo {
+    height: 70px;
+  }
+  
+  .branch-header h2 {
+    font-size: 24px;
+  }
+  
+  .branch-header p {
+    font-size: 14px;
+  }
+  
+  .continue-button {
+    padding: 12px 18px;
+  }
+}
+
+/* Media queries para mejorar la experiencia en móviles */
+@media (max-width: 480px) {
+  .select-branch-content {
+    border-radius: 12px;
+    padding: 25px 20px;
+    width: 90%;
+    max-width: 95%;
+    max-height: 90vh;
+    margin-bottom: 7vh;
+  }
+
+  .company-branding {
+    margin-bottom: 15px;
+  }
+  
+  .company-logo {
+    height: 60px;
+  }
+
+  .branch-header {
+    margin-bottom: 15px;
+  }
+  
+  .branch-header h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .branch-header p {
+    font-size: 13px;
+  }
+  
+  .branch-selector {
+    margin-bottom: 15px;
+  }
+  
+  .branch-selector label {
+    font-size: 14px;
+  }
+  
+  .branch-select-field {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .continue-button {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-radius: 30px; /* Botón más redondeado como en survey.css */
+  }
+  
+  .admin-link {
+    margin-top: 15px;
+  }
+  
+  .admin-button {
+    font-size: 13px;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    background-color: transparent;
+    transition: all 0.3s;
+  }
+  
+  .admin-button:hover {
+    background-color: #f5f5f5;
+    color: var(--primary-color);
+  }
+}
+
+/* Mejora específica para dispositivos muy pequeños */
+@media (max-width: 360px) {
+  .select-branch-content {
+    padding: 20px 15px;
+  }
+  
+  .company-logo {
+    height: 50px;
+  }
+  
+  .branch-header h2 {
+    font-size: 18px;
   }
 }
