@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm run dev
+      - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAPPY_OR_NOT_88F28 }}
-          projectId: happy-or-not-88f28
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_XPRESA3 }}
+          projectId: xpresa3

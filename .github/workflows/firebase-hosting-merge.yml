@@ -11,17 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: npm install  # ⚠️ Esto instala Vite y otras dependencias
-
-      - name: Build project
-        run: npm run build  # ⚠️ Esto genera los archivos de producción
-
-      - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - run: npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAPPY_OR_NOT_88F28 }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_XPRESA3 }}
           channelId: live
-          projectId: happy-or-not-88f28
+          projectId: xpresa3
