@@ -73,17 +73,8 @@ const Survey = () => {
       return;
     }
 
-    const userId = auth.currentUser ? auth.currentUser.uid : null;
+    const userId = auth.currentUser ? auth.currentUser.uid : "anonymous";
 
-    if (!userId) {
-      console.error("❌ No se encontró un usuario autenticado.");
-      setAlert({
-        show: true,
-        message: "Error: Debes estar autenticado para enviar feedback",
-        type: "error"
-      });
-      return;
-    }
 
     try {
       // Preparar datos para guardar, incluyendo el motivo y comentario

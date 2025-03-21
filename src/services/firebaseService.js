@@ -11,9 +11,9 @@ export const saveFeedback = async (feedbackData) => {
     const auth = getAuth();
     const user = auth.currentUser;
     
-    // Si no hay un userId en los datos pasados, usamos el del usuario autenticado
-    if (!feedbackData.userId && user) {
-      feedbackData.userId = user.uid;
+    // Si no hay un userId en los datos pasados, usamos "anonymous" o el ID del usuario autenticado
+    if (!feedbackData.userId) {
+      feedbackData.userId = user ? user.uid : "anonymous";
     }
     
     // Aseguramos que haya un timestamp si no fue proporcionado
