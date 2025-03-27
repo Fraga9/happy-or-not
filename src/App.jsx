@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import SelectBranch from "./components/SelectBranch";
@@ -8,22 +8,26 @@ import { auth } from "./firebaseConfig";
 import AdminDashboard from "./components/AdminDashboard";
 import "./styles/styles.css";
 
+// Wrapper component to handle branch-specific survey routing
+const SurveyWrapper = () => {
+  const { sucursalName } = useParams();
+  return <Survey initialBranch={sucursalName} />;
+};
+
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [branch, setBranch] = useState("");
-  const [loading, setLoading] = useState(true); // Estado de carga añadido
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       console.log("Estado de autenticación cambiado:", user);
       setLoggedIn(!!user);
-      setLoading(false); // Finalizar carga cuando tengamos la información de autenticación
+      setLoading(false);
     });
 
     return unsubscribe;
   }, []);
 
-  // Mostrar un indicador de carga mientras verificamos la autenticación
   if (loading) {
     return <div className="loading">Cargando...</div>;
   }
@@ -32,9 +36,9 @@ export default function App() {
     <Routes>
       <Route path="/login" element={loggedIn ? <Navigate to="/" /> : <Login onLogin={() => setLoggedIn(true)} />} />
       <Route path="/signup" element={loggedIn ? <Navigate to="/" /> : <Signup />} />
-      <Route path="/" element={<SelectBranch onSelect={setBranch} />} />
+      <Route path="/" element={<SelectBranch />} />
       <Route path="/admin" element={loggedIn ? <AdminDashboard /> : <Navigate to="/login" />} />
-      <Route path="/survey" element={branch ? <Survey branch={branch} /> : <Navigate to="/" />} />
+      <Route path="/survey/:sucursalName" element={<SurveyWrapper />} />
     </Routes>
   );
 }

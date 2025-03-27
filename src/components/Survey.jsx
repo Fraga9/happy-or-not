@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { saveFeedback } from "../services/firebaseService";
 import { auth } from "../firebaseConfig";
 import "../styles/survey.css";
@@ -7,7 +7,7 @@ import companyLogo from "/Promexma.jpeg";
 import WhatsAppQR from "./WhatsAppQR";
 import Alert from "./Alert";
 
-const Survey = () => {
+const Survey = ({ initialBranch }) => {
   const [rating, setRating] = useState(null);
   const [sucursal, setSucursal] = useState("");
   const [showWhatsAppQR, setShowWhatsAppQR] = useState(false);
@@ -16,17 +16,20 @@ const Survey = () => {
   const [feedbackComment, setFeedbackComment] = useState("");
   const [alert, setAlert] = useState({ show: false, message: "", type: "success" });
   const navigate = useNavigate();
+  const { sucursalName } = useParams();
 
-  // Cargar la sucursal del localStorage al iniciar
+  // Initialize sucursal from route param or prop
   useEffect(() => {
-    const savedBranch = localStorage.getItem("selectedBranch");
-    if (savedBranch) {
-      setSucursal(savedBranch);
+    const branchToUse = sucursalName || initialBranch;
+    
+    if (branchToUse) {
+      setSucursal(branchToUse);
+      localStorage.setItem("selectedBranch", branchToUse);
     } else {
-      // Si no hay sucursal seleccionada, redirigir a la selección
+      // If no branch is specified, redirect to branch selection
       navigate("/");
     }
-  }, [navigate]);
+  }, [sucursalName, initialBranch, navigate]);
 
   const handleRatingClick = (value) => {
     setRating(value);

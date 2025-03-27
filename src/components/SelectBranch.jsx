@@ -31,7 +31,7 @@ const regions = {
   ]
 };
 
-export default function SelectBranch({ onSelect }) {
+export default function SelectBranch() {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedBranch, setSelectedBranch] = useState("");
   const navigate = useNavigate();
@@ -61,8 +61,8 @@ export default function SelectBranch({ onSelect }) {
       alert("Por favor, selecciona una sucursal.");
       return;
     }
-    onSelect(selectedBranch);
-    navigate("/survey");
+    // Navigate to survey with branch name in the URL
+    navigate(`/survey/${encodeURIComponent(selectedBranch)}`);
   };
 
   const handleAdmin = () => {
