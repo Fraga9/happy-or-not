@@ -6,6 +6,7 @@ import "../styles/survey.css";
 import companyLogo from "/Promexma.jpeg";
 import WhatsAppQR from "./WhatsAppQR";
 import Alert from "./Alert";
+import ShareQRCode from "./ShareQRCode"; // Importar el nuevo componente
 
 const Survey = ({ initialBranch }) => {
   const [rating, setRating] = useState(null);
@@ -15,6 +16,7 @@ const Survey = ({ initialBranch }) => {
   const [feedbackReason, setFeedbackReason] = useState("");
   const [feedbackComment, setFeedbackComment] = useState("");
   const [alert, setAlert] = useState({ show: false, message: "", type: "success" });
+  const [showShareQR, setShowShareQR] = useState(false); // Estado para controlar la visualización del QR
   const navigate = useNavigate();
   const { sucursalName } = useParams();
 
@@ -42,6 +44,20 @@ const Survey = ({ initialBranch }) => {
       setFeedbackReason("");
       setFeedbackComment("");
     }
+  };
+
+  // Obtener la URL actual para el código QR
+  const currentUrl = window.location.origin + `/survey/${sucursal}`;
+
+  // Función para mostrar el QR
+  const handleShowShareQR = (e) => {
+    e.preventDefault();
+    setShowShareQR(true);
+  };
+
+  // Función para cerrar el QR
+  const handleCloseShareQR = () => {
+    setShowShareQR(false);
   };
 
   const feedbackReasons = [
@@ -149,7 +165,16 @@ const Survey = ({ initialBranch }) => {
         </div>
         <div className="survey-header">
           <h2>Encuesta de Satisfacción</h2>
-          <p>Sucursal seleccionada: <strong>{sucursal}</strong></p>
+          <p>
+            Sucursal seleccionada:{" "}
+            <strong 
+              className="branch-name" 
+              onClick={handleShowShareQR}
+              style={{ cursor: "pointer", textDecoration: "underline" }}
+            >
+              {sucursal}
+            </strong>
+          </p>
         </div>
         <div className="feedback-section">
           <h3>¿Cómo calificarías tu experiencia hoy?</h3>
@@ -224,6 +249,15 @@ const Survey = ({ initialBranch }) => {
         
         {/* WhatsApp QR Component */}
         {showWhatsAppQR && <WhatsAppQR onClose={handleCloseWhatsAppQR} />}
+        
+        {/* Share QR Code Component */}
+        {showShareQR && (
+          <ShareQRCode 
+            url={currentUrl}
+            sucursal={sucursal}
+            onClose={handleCloseShareQR}
+          />
+        )}
       </div>
     </div>
   );
