@@ -305,10 +305,18 @@
 @media (max-width: 480px) {
   .survey-content {
     border-radius: 12px;
-    padding: 25px 20px;
+    padding: 10px 20px;
     width: 90%;
     max-width: 95%;
-    max-height: 90vh;
+    max-height: 95vh;
+  }
+  .submit-button {
+    padding: 16px 24px;
+    margin-bottom: 5px;
+  }
+
+  .company-branding {
+    margin-bottom: 0px;
   }
 
   .survey-header h2 {
@@ -318,7 +326,7 @@
 
   .feedback-buttons {
     flex-direction: column;
-    gap: 12px;
+    gap: 6px;
   }
   
   .feedback-button {
@@ -327,6 +335,7 @@
     width: 100%;
     padding: 15px;
     align-items: center;
+    max-height: 60px;
   }
   
   .feedback-button span {
