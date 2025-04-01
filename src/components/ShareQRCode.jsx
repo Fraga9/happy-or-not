@@ -5,84 +5,221 @@ import "../styles/shareQRCode.css";
 const ShareQRCode = ({ url, sucursal, onClose }) => {
   const qrRef = useRef(null);
   const [copied, setCopied] = useState(false);
-  const [downloading, setDownloading] = useState(false);
+  const [printing, setPrinting] = useState(false);
 
-  // Función para descargar el QR
-  const handleDownload = () => {
-    setDownloading(true);
-    
-    // Obtener el elemento SVG
-    const svgElement = document.getElementById('qr-code-svg').querySelector('svg');
-    if (!svgElement) {
-      setDownloading(false);
-      return;
-    }
-    
-    // Crear un canvas temporal
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    
-    // Establecer dimensiones del canvas con un borde extra
-    canvas.width = 240;
-    canvas.height = 240;
-    
-    // Crear una imagen basada en el SVG
-    const img = new Image();
-    
-    // Convertir SVG a string y codificarlo en base64
-    const svgData = new XMLSerializer().serializeToString(svgElement);
-    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-    const svgUrl = URL.createObjectURL(svgBlob);
-    
-    // Cuando la imagen cargue, dibujarla en el canvas y crear la descarga
-    img.onload = function() {
-      // Dibujar fondo con degradado
-      const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#f9f9f9');
-      gradient.addColorStop(1, '#ffffff');
-      context.fillStyle = gradient;
-      context.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Dibujar borde estilizado
-      context.strokeStyle = '#f0212f';
-      context.lineWidth = 8;
-      context.strokeRect(4, 4, canvas.width - 8, canvas.height - 8);
-      
-      // Dibujar la imagen del QR centrada
-      context.drawImage(img, 20, 20, canvas.width - 40, canvas.height - 40);
-      
-      // Añadir texto de la sucursal
-      context.font = 'bold 14px Arial';
-      context.textAlign = 'center';
-      context.fillStyle = '#000000';
-      context.fillText(`Sucursal ${sucursal}`, canvas.width / 2, canvas.height - 12);
-      
-      // Convertir canvas a PNG
-      const pngUrl = canvas.toDataURL('image/png');
-      
-      // Crear enlace de descarga
-      const downloadLink = document.createElement('a');
-      downloadLink.href = pngUrl;
-      downloadLink.download = `QR_Sucursal_${sucursal}.png`;
-      
-      // Simular clic para iniciar descarga
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-      
-      // Liberar el objeto URL
-      URL.revokeObjectURL(svgUrl);
-      setDownloading(false);
-    };
-    
-    // Asignar la fuente de la imagen al URL del SVG
-    img.src = svgUrl;
-  };
-
+  // Función para copiar el enlace
   const handleCopyLink = () => {
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  // Función para imprimir el QR en formato vertical
+  const handlePrint = () => {
+    setPrinting(true);
+    
+    // Crear una nueva ventana para la impresión
+    const printWindow = window.open('', '_blank');
+    
+    // Contenido HTML para la ventana de impresión
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>QR Sucursal ${sucursal}</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+            
+            body {
+              margin: 0;
+              padding: 0;
+              font-family: 'Poppins', sans-serif;
+              background-color: #f5f7fa;
+            }
+    
+            .print-container {
+              width: 100%;
+              max-width: 100vw;
+              height: 100vh;
+              margin: 0 auto;
+              padding: 50px;
+              box-sizing: border-box;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 30px;
+              position: relative;
+              overflow: hidden;
+            }
+            
+            /* Elementos decorativos inspirados en el proyecto de referencia */
+            .print-container::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 200px;
+              height: 200px;
+              background-color: rgba(240, 33, 47, 0.08);
+              clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+              z-index: -1;
+            }
+            
+            .print-container::after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 300px;
+              height: 300px;
+              background-color: #f0212f;
+              background-image: linear-gradient(45deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.1) 15%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.05) 30%, transparent 40%);
+              clip-path: polygon(0% 30%, 100% 100%, 0% 100%);
+              z-index: -1;
+            }
+      
+
+
+    
+            .logo {
+              width: 100%;
+              max-width: 350px;
+              display: block;
+              filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+              z-index: 2;
+            }
+    
+            .qr-container {
+              background: white;
+              border: 12px solid #f0212f;
+              border-radius: 20px;
+              padding: 25px;
+              width: 530px;
+              height: 530px;
+              position: relative;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 10px 25px rgba(240,33,47,0.15);
+              z-index: 2;
+            }
+    
+            .qr-branch-label {
+              position: absolute;
+              bottom: -15px;
+              left: 50%;
+              transform: translateX(-50%);
+              background-color: #f0212f;
+              color: white;
+              font-size: 22px;
+              font-weight: 700;
+              padding: 8px 25px;
+              border-radius: 25px;
+              white-space: nowrap;
+              box-shadow: 0 4px 15px rgba(240,33,47,0.3);
+              z-index: 3;
+            }
+    
+            .instruction-container {
+              background: #f0212f;
+              border-radius: 15px;
+              padding: 15px 30px;
+              display: flex;
+              align-items: center;
+              gap: 15px;
+              box-shadow: 0 4px 15px rgba(240,33,47,0.2);
+              width: 100%;
+              max-width: 400px;
+              position: relative; 
+              z-index: 2;
+            }
+    
+            .instruction-icon {
+              font-size: 28px;
+              color: white;
+            }
+    
+            .instruction-text {
+              font-size: 28px;
+              font-weight: 600;
+              color: white;
+            }
+    
+            .footer-logo {
+              width: 160px;
+              z-index: 2;
+            }
+            
+            
+    
+            @media print {
+              @page {
+                size: portrait;
+                margin: 0;
+              }
+              
+              body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+              }
+    
+              .no-print {
+                display: none;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="print-container">
+            <div class="side-bar"></div>
+            <img src="/Promexma.jpeg" alt="Promexma" class="logo" />
+            
+            <div class="qr-container">
+              <svg width="600" height="600" viewBox="0 0 200 200">
+                ${document.getElementById('qr-code-svg').querySelector('svg').outerHTML}
+              </svg>
+              <div class="qr-branch-label">${sucursal}</div>
+            </div>
+            
+            <div class="instruction-container">
+              <div class="instruction-icon">📱</div>
+              <div class="instruction-text">Califica tu experiencia</div>
+            </div>
+            
+            <img src="/Xpresa.svg" alt="Xpresa" class="footer-logo" />
+            
+            <button class="no-print" onclick="window.print(); window.close();" 
+              style="position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #f0212f; color: white; border: none; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; z-index: 10;">
+              Imprimir
+            </button>
+          </div>
+          <script>
+            window.onload = function() {
+              setTimeout(function() {
+                window.print();
+              }, 500);
+            }
+          </script>
+        </body>
+      </html>
+    `;
+  
+    
+    // Escribir el contenido en la nueva ventana
+    printWindow.document.open();
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    
+    // Manejar el evento de cierre de la ventana de impresión
+    printWindow.onafterprint = function() {
+      printWindow.close();
+      setPrinting(false);
+    };
+    
+    setTimeout(() => {
+      setPrinting(false);
+    }, 3000);
   };
 
   return (
@@ -97,7 +234,6 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
         
         <div className="qr-container">
           <div className="qr-code-wrapper" id="qr-code-svg">
-            <div className="qr-scanner-animation"></div>
             <QRCodeSVG 
               value={url}
               size={200}
@@ -137,11 +273,11 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
         
         <div className="qr-actions">
           <button 
-            className={`download-button ${downloading ? 'loading' : ''}`}
-            onClick={handleDownload}
-            disabled={downloading}
+            className={`print-button ${printing ? 'loading' : ''}`}
+            onClick={handlePrint}
+            disabled={printing}
           >
-            {downloading ? 'Descargando...' : 'Descargar QR'}
+            {printing ? 'Preparando impresión...' : 'Imprimir flyer'}
           </button>
           <button 
             className={`share-button ${copied ? 'copied' : ''}`}
