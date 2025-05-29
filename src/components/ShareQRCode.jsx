@@ -79,8 +79,8 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
             }            
             .logo {
               width: 100%;
-              max-width: 320px;
-              z-index: 2;
+              max-width: 450px;
+              z-index: -5;
               margin-top: auto;
             }
     
@@ -89,8 +89,8 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
               border: 15px solid #f0212f;
               border-radius: 25px;
               padding: 30px;
-              width: 350px;
-              height: 350px;
+              width: 450px;
+              height: 450px;
               position: relative;
               display: flex;
               align-items: center;
@@ -132,7 +132,7 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
               position: relative; 
               z-index: 2;
               transform: scale(1.1);
-              margin-bottom: 20px;
+              margin-bottom: 50px;
             }
     
             .instruction-icon {
@@ -149,26 +149,7 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
               letter-spacing: 1px;
               text-transform: uppercase;
             }            
-            .footer-logos {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              gap: 10px;
-              z-index: 2;
-              margin-top: 50px;
-            }
-    
-            .logo {
-              width: 220px;
-            }
-    
-            .footer-logo {
-              width: 120px;
-            }
-            
-            
-    
+
             @media print {
               @page {
                 size: portrait;
@@ -195,17 +176,12 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
             <div class="instruction-container">
               <div class="instruction-text">Califica tu experiencia</div>
             </div>            <div class="qr-container">
-              <svg width="350" height="350" viewBox="0 0 200 200">
+              <svg width="450" height="450" viewBox="0 0 200 200">
                 ${document.getElementById('qr-code-svg').querySelector('svg').outerHTML}
               </svg>
               <div class="qr-branch-label">${sucursal}</div>
             </div>
-            
-            <div class="footer-logos">
-              <img src="/Xpresa.svg" alt="Xpresa" class="footer-logo" />
-              <img src="/Promexma.jpeg" alt="Promexma" class="logo" />
-            </div>
-            
+            <img src="/Promexma.jpeg" alt="Promexma" class="logo" />      
             <button class="no-print" onclick="window.print(); window.close();" 
               style="position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #f0212f; color: white; border: none; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; z-index: 10;">
               Imprimir
