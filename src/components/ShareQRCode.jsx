@@ -30,24 +30,23 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-            
-            body {
+              body {
               margin: 0;
               padding: 0;
               font-family: 'Poppins', sans-serif;
-              background-color: #f5f7fa;
-            }
-    
+              background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf3 100%);
+            }            
             .print-container {
               width: 100%;
               max-width: 100vw;
               height: 100vh;
               margin: 0 auto;
-              padding: 50px;
+              padding: 40px 30px;
               box-sizing: border-box;
               display: flex;
               flex-direction: column;
               align-items: center;
+              justify-content: center;
               gap: 30px;
               position: relative;
               overflow: hidden;
@@ -77,78 +76,95 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
               background-image: linear-gradient(45deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.1) 15%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.05) 30%, transparent 40%);
               clip-path: polygon(0% 30%, 100% 100%, 0% 100%);
               z-index: -1;
-            }
-      
-
-
-    
+            }            
             .logo {
               width: 100%;
-              max-width: 350px;
-              display: block;
-              filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+              max-width: 320px;
               z-index: 2;
+              margin-top: auto;
             }
     
             .qr-container {
               background: white;
-              border: 12px solid #f0212f;
-              border-radius: 20px;
-              padding: 25px;
-              width: 530px;
-              height: 530px;
+              border: 15px solid #f0212f;
+              border-radius: 25px;
+              padding: 30px;
+              width: 350px;
+              height: 350px;
               position: relative;
               display: flex;
               align-items: center;
               justify-content: center;
-              box-shadow: 0 10px 25px rgba(240,33,47,0.15);
+              box-shadow: 0 15px 40px rgba(240,33,47,0.25);
               z-index: 2;
+              transform: scale(1.05);
             }
     
             .qr-branch-label {
               position: absolute;
-              bottom: -15px;
+              bottom: -20px;
               left: 50%;
               transform: translateX(-50%);
-              background-color: #f0212f;
+              background: linear-gradient(135deg, #f0212f 0%, #d41e2a 100%);
               color: white;
-              font-size: 22px;
-              font-weight: 700;
-              padding: 8px 25px;
-              border-radius: 25px;
+              font-size: 26px;
+              font-weight: 800;
+              padding: 12px 35px;
+              border-radius: 30px;
               white-space: nowrap;
-              box-shadow: 0 4px 15px rgba(240,33,47,0.3);
+              box-shadow: 0 8px 25px rgba(240,33,47,0.4);
               z-index: 3;
+              text-transform: uppercase;
+              letter-spacing: 1px;
             }
     
             .instruction-container {
-              background: #f0212f;
-              border-radius: 15px;
-              padding: 15px 30px;
+              background: linear-gradient(135deg, #f0212f 0%, #d41e2a 100%);
+              border-radius: 20px;
+              padding: 25px 40px;
               display: flex;
               align-items: center;
-              gap: 15px;
-              box-shadow: 0 4px 15px rgba(240,33,47,0.2);
+              justify-content: center;
+              gap: 20px;
+              box-shadow: 0 8px 30px rgba(240,33,47,0.3);
               width: 100%;
-              max-width: 400px;
+              max-width: 530px;
               position: relative; 
               z-index: 2;
+              transform: scale(1.1);
+              margin-bottom: 20px;
             }
     
             .instruction-icon {
-              font-size: 28px;
+              font-size: 36px;
               color: white;
+              text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }            
+            .instruction-text {
+              font-size: 36px;
+              font-weight: 700;
+              color: white;
+              text-align: center;
+              text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            }            
+            .footer-logos {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              z-index: 2;
+              margin-top: 50px;
             }
     
-            .instruction-text {
-              font-size: 28px;
-              font-weight: 600;
-              color: white;
+            .logo {
+              width: 220px;
             }
     
             .footer-logo {
-              width: 160px;
-              z-index: 2;
+              width: 120px;
             }
             
             
@@ -173,21 +189,22 @@ const ShareQRCode = ({ url, sucursal, onClose }) => {
         <body>
           <div class="print-container">
             <div class="side-bar"></div>
-            <img src="/Promexma.jpeg" alt="Promexma" class="logo" />
             
-            <div class="qr-container">
-              <svg width="600" height="600" viewBox="0 0 200 200">
+            
+
+            <div class="instruction-container">
+              <div class="instruction-text">Califica tu experiencia</div>
+            </div>            <div class="qr-container">
+              <svg width="350" height="350" viewBox="0 0 200 200">
                 ${document.getElementById('qr-code-svg').querySelector('svg').outerHTML}
               </svg>
               <div class="qr-branch-label">${sucursal}</div>
             </div>
             
-            <div class="instruction-container">
-              <div class="instruction-icon">📱</div>
-              <div class="instruction-text">Califica tu experiencia</div>
+            <div class="footer-logos">
+              <img src="/Xpresa.svg" alt="Xpresa" class="footer-logo" />
+              <img src="/Promexma.jpeg" alt="Promexma" class="logo" />
             </div>
-            
-            <img src="/Xpresa.svg" alt="Xpresa" class="footer-logo" />
             
             <button class="no-print" onclick="window.print(); window.close();" 
               style="position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #f0212f; color: white; border: none; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; z-index: 10;">
